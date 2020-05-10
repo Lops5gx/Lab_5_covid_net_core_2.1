@@ -35,38 +35,38 @@ namespace COVID19.Models
         public Pais Paises { get; set; }
 
 
-        public void adicionaCasos(int qtd)
-        {
-            casos += qtd;
-        }
-        public void removerCasos(int qtd)
-        {
-            casos = casos - qtd;
-        }
+        //public void adicionaCasos(int qtd)
+        //{
+        //    casos += qtd;
+        //}
+        //public void removerCasos(int qtd)
+        //{
+        //    casos = casos - qtd;
+        //}
 
-        public void atualizaCasos(int numCasos)
-        {
-            casos = numCasos;
-        }
-
-
+        //public void atualizaCasos(int numCasos)
+        //{
+        //    casos = numCasos;
+        //}
 
 
 
-        public void adicionaMortes(int qtd)
-        {
-            mortes += qtd;
-        }
 
-        public void removerMortes(int qtd)
-        {
-            mortes = mortes - qtd;
-        }
 
-        public void atualizaMortes(int numMortes)
-        {
-            casos = numMortes;
-        }
+        //public void adicionaMortes(int qtd)
+        //{
+        //    mortes += qtd;
+        //}
+
+        //public void removerMortes(int qtd)
+        //{
+        //    mortes = mortes - qtd;
+        //}
+
+        //public void atualizaMortes(int numMortes)
+        //{
+        //    casos = numMortes;
+        //}
 
 
 
