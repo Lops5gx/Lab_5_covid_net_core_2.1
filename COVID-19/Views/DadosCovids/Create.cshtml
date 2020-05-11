@@ -1,30 +1,45 @@
 ﻿@model COVID19.Models.DadoCovid
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar dados";
 }
 
-<h2>Create</h2>
+<h1>Adicionar dados</h1>
 
-<h4>DadoCovid</h4>
+<h4>Dados Covid-19</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PaisesId" class="control-label"></label>
-                <select asp-for="PaisesId" class ="form-control" asp-items="ViewBag.PaisesId"></select>
+                <label asp-for="mortes" class="control-label"></label>
+                <input asp-for="mortes" class="form-control" />
+                <span asp-validation-for="mortes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="confirmados" class="control-label"></label>
+                <input asp-for="confirmados" class="form-control" />
+                <span asp-validation-for="confirmados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="recuperados" class="control-label"></label>
+                <input asp-for="recuperados" class="form-control" />
+                <span asp-validation-for="recuperados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="paisId" class="control-label"></label>
+                <select asp-for="paisId" class="form-control" asp-items="ViewBag.paisId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adicionar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn">Voltar à lista</a>
 </div>
 
 @section Scripts {

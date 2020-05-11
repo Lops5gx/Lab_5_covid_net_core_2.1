@@ -1,12 +1,12 @@
 ﻿@model COVID19.Models.DadoCovid
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar dado";
 }
 
-<h2>Edit</h2>
+<h1>Editar dado</h1>
 
-<h4>DadoCovid</h4>
+<h4>Covid-19</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,19 +14,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="PaisesId" class="control-label"></label>
-                <select asp-for="PaisesId" class="form-control" asp-items="ViewBag.PaisesId"></select>
-                <span asp-validation-for="PaisesId" class="text-danger"></span>
+                <label asp-for="mortes" class="control-label"></label>
+                <input asp-for="mortes" class="form-control" />
+                <span asp-validation-for="mortes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="confirmados" class="control-label"></label>
+                <input asp-for="confirmados" class="form-control" />
+                <span asp-validation-for="confirmados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="recuperados" class="control-label"></label>
+                <input asp-for="recuperados" class="form-control" />
+                <span asp-validation-for="recuperados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="paisId" class="control-label"></label>
+                <select asp-for="paisId" class="form-control" asp-items="ViewBag.paisId"></select>
+                <span asp-validation-for="paisId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn">Voltar à lista</a>
 </div>
 
 @section Scripts {

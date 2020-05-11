@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using COVID19.Models;
 using COVID_19.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace COVID_19.Controllers
 {
+    [Authorize]
     public class PaisesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -34,7 +36,7 @@ namespace COVID_19.Controllers
             }
 
             var pais = await _context.Paises
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.idPais == id);
             if (pais == null)
             {
                 return NotFound();
@@ -54,7 +56,7 @@ namespace COVID_19.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id")] Pais pais)
+        public async Task<IActionResult> Create([Bind("idPais")] Pais pais)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +88,9 @@ namespace COVID_19.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id")] Pais pais)
+        public async Task<IActionResult> Edit(int id, [Bind("idPais, nomePais")] Pais pais)
         {
-            if (id != pais.id)
+            if (id != pais.idPais)
             {
                 return NotFound();
             }
@@ -102,7 +104,7 @@ namespace COVID_19.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PaisExists(pais.id))
+                    if (!PaisExists(pais.idPais))
                     {
                         return NotFound();
                     }
@@ -125,7 +127,7 @@ namespace COVID_19.Controllers
             }
 
             var pais = await _context.Paises
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.idPais == id);
             if (pais == null)
             {
                 return NotFound();
@@ -147,7 +149,7 @@ namespace COVID_19.Controllers
 
         private bool PaisExists(int id)
         {
-            return _context.Paises.Any(e => e.id == id);
+            return _context.Paises.Any(e => e.idPais == id);
         }
     }
 }

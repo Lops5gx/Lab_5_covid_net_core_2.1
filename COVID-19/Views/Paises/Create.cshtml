@@ -1,25 +1,33 @@
 ﻿@model COVID19.Models.Pais
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar País";
 }
 
-<h2>Create</h2>
+<h1>Adicionar País</h1>
 
-<h4>Pais</h4>
+<h4>País</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="nomePais" class="control-label"></label>
+                <input asp-for="nomePais" class="form-control" />
+                <span asp-validation-for="nomePais" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adicionar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn">Voltar à lista</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

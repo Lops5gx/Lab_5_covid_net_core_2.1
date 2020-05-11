@@ -1,35 +1,60 @@
 ﻿@model IEnumerable<COVID19.Models.DadoCovid>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dados da pandemia";
 }
 
-<h2>Index</h2>
+<h1>Os Dados hoje:</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Paises)
+                @Html.DisplayNameFor(model => model.mortes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.confirmados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.recuperados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pais)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Paises.id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mortes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.confirmados)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.recuperados)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pais.nomePais)
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.id" class="btn btn-primary">Detalhes</a>
+                        <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
     </tbody>
 </table>
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create" class="btn btn-success">Adicionar novos dados</a>
+    }
+</p>

@@ -7,86 +7,28 @@ using System.Threading.Tasks;
 
 namespace COVID19.Models
 {
-    [Table("Dados")]
-    
-
+    [Table("DadosCovid")]
     public class DadoCovid
     {
         [Key]
+        [Display(Name = "Código")]
         public int id { get; set; }
 
-        [Display(Name = "Casos")]
-        [Required(ErrorMessage = "Campo Obrigatório")]
-        private int casos { get; set; }
+        [Display(Name = "Nº Mortes")]
+        public int mortes { get; set; }
 
-        [Display(Name = "Mortes")]
-        [Required(ErrorMessage = "Campo Obrigatório")]
-        private int mortes { get; set; }
+        [Display(Name = "Nº Casos Confirmados")]
+        public int confirmados { get; set; }
 
-        [Display(Name = "Recuperados")]
-        [Required(ErrorMessage = "Campo Obrigatório")]
-        private int recuperados { get; set; }
+        [Display(Name = "Nº Pessoas Recuperadas")]
+        public int recuperados { get; set; }
 
-        private String pais { get; set; }
+        [Display(Name = "País")]
+        public int paisId { get; set; }
 
-        public int PaisesId { get; set; }
-
-        [ForeignKey("PaisesId")]
-        public Pais Paises { get; set; }
-
-
-        //public void adicionaCasos(int qtd)
-        //{
-        //    casos += qtd;
-        //}
-        //public void removerCasos(int qtd)
-        //{
-        //    casos = casos - qtd;
-        //}
-
-        //public void atualizaCasos(int numCasos)
-        //{
-        //    casos = numCasos;
-        //}
-
-
-
-
-
-        //public void adicionaMortes(int qtd)
-        //{
-        //    mortes += qtd;
-        //}
-
-        //public void removerMortes(int qtd)
-        //{
-        //    mortes = mortes - qtd;
-        //}
-
-        //public void atualizaMortes(int numMortes)
-        //{
-        //    casos = numMortes;
-        //}
-
-
-
-
-
-        public void adicionaRecuperados(int qtd)
-        {
-            recuperados += qtd;
-        }
-
-        public void removerRecuperados(int qtd)
-        {
-            recuperados = recuperados - qtd;
-        }
-
-        public void atualizaRecuperados(int numRecuperados)
-        {
-            casos = numRecuperados;
-        }
-
+        [Display(Name = "País")]
+        [ForeignKey("paisId")]
+        public Pais pais { get; set; }
 
     }
 }

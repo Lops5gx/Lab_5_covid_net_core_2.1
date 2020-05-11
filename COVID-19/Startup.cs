@@ -67,7 +67,7 @@ namespace COVID_19
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=DadosCovids}/{action=Index}/{id?}");
             });
         }
     }

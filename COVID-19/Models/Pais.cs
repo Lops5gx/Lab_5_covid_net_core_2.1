@@ -7,31 +7,15 @@ using System.Threading.Tasks;
 
 namespace COVID19.Models
 {
-        [Table("Paises")]
-
-
+    [Table("Paises")]
     public class Pais
     {
         [Key]
-        public int id{ get; set; }
+        [Display(Name = "Código")]
+        public int idPais { get; set; }
 
-        [Display(Name = "Paises")]
-        [Required(ErrorMessage ="Campo Obrigatório")]
-        private ArraySegment<String> Nome { get; set; }
-
-
-        public ICollection<DadoCovid> DadosCovid{ get; set; }
-
-        Pais()
-        {
-            Nome.Append("Alemanha");
-            Nome.Append("Brasil");
-            Nome.Append("China");
-            Nome.Append("Estados Unidos");
-            Nome.Append("Itália");
-        }
-
-
-
+        [Display(Name = "País")]
+        [Required(ErrorMessage = "Campo Obrigatório")]
+        public string nomePais { get; set; }
     }
 }

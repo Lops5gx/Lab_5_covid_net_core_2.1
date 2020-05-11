@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using COVID19.Models;
 using COVID_19.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace COVID_19.Controllers
 {
@@ -19,14 +20,14 @@ namespace COVID_19.Controllers
             _context = context;
         }
 
-        // GET: DadosCovids
+        // GET: DadoCovids
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.DadosCovid.Include(d => d.Paises);
+            var applicationDbContext = _context.DadosCovid.Include(d => d.pais);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: DadosCovids/Details/5
+        // GET: DadoCovids/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,7 +36,7 @@ namespace COVID_19.Controllers
             }
 
             var dadoCovid = await _context.DadosCovid
-                .Include(d => d.Paises)
+                .Include(d => d.pais)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (dadoCovid == null)
             {
@@ -45,19 +46,20 @@ namespace COVID_19.Controllers
             return View(dadoCovid);
         }
 
-        // GET: DadosCovids/Create
+        [Authorize]
+        // GET: DadoCovids/Create
         public IActionResult Create()
         {
-            ViewData["PaisesId"] = new SelectList(_context.Paises, "id", "id");
+            ViewData["paisId"] = new SelectList(_context.Paises, "idPais", "nomePais");
             return View();
         }
 
-        // POST: DadosCovids/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: DadoCovids/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,PaisesId")] DadoCovid dadoCovid)
+        public async Task<IActionResult> Create([Bind("id,mortes,confirmados,recuperados,paisId")] DadoCovid dadoCovid)
         {
             if (ModelState.IsValid)
             {
@@ -65,11 +67,12 @@ namespace COVID_19.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PaisesId"] = new SelectList(_context.Paises, "id", "id", dadoCovid.PaisesId);
+            ViewData["paisId"] = new SelectList(_context.Paises, "idPais", "nomePais", dadoCovid.paisId);
             return View(dadoCovid);
         }
 
-        // GET: DadosCovids/Edit/5
+        [Authorize]
+        // GET: DadoCovids/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,16 +85,16 @@ namespace COVID_19.Controllers
             {
                 return NotFound();
             }
-            ViewData["PaisesId"] = new SelectList(_context.Paises, "id", "id", dadoCovid.PaisesId);
+            ViewData["paisId"] = new SelectList(_context.Paises, "idPais", "nomePais", dadoCovid.paisId);
             return View(dadoCovid);
         }
 
-        // POST: DadosCovids/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: DadoCovids/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,PaisesId")] DadoCovid dadoCovid)
+        public async Task<IActionResult> Edit(int id, [Bind("id,mortes,confirmados,recuperados,paisId")] DadoCovid dadoCovid)
         {
             if (id != dadoCovid.id)
             {
@@ -118,11 +121,12 @@ namespace COVID_19.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PaisesId"] = new SelectList(_context.Paises, "id", "id", dadoCovid.PaisesId);
+            ViewData["paisId"] = new SelectList(_context.Paises, "idPais", "nomePais", dadoCovid.paisId);
             return View(dadoCovid);
         }
 
-        // GET: DadosCovids/Delete/5
+        [Authorize]
+        // GET: DadoCovids/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,7 +135,7 @@ namespace COVID_19.Controllers
             }
 
             var dadoCovid = await _context.DadosCovid
-                .Include(d => d.Paises)
+                .Include(d => d.pais)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (dadoCovid == null)
             {
@@ -141,7 +145,7 @@ namespace COVID_19.Controllers
             return View(dadoCovid);
         }
 
-        // POST: DadosCovids/Delete/5
+        // POST: DadoCovids/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
