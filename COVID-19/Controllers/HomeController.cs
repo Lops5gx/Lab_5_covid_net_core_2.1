@@ -13,7 +13,7 @@ namespace COVID_19.Controllers
         
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Trabalho - Laboratório V. - Puc Minas/Praça da Liberdade";
 
             return View();
         }
