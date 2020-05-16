@@ -56,7 +56,7 @@ namespace COVID_19.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idPais")] Pais pais)
+        public async Task<IActionResult> Create([Bind("idPais,nomePais")] Pais pais)
         {
             if (ModelState.IsValid)
             {

@@ -15,12 +15,15 @@ namespace COVID19.Models
         public int id { get; set; }
 
         [Display(Name = "Nº Mortes")]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public int mortes { get; set; }
 
         [Display(Name = "Nº Casos Confirmados")]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public int confirmados { get; set; }
 
         [Display(Name = "Nº Pessoas Recuperadas")]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public int recuperados { get; set; }
 
         [Display(Name = "País")]
